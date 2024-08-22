@@ -25,6 +25,13 @@ h1 {
   margin-bottom: 1rem;
 }
 
+#translation {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+  color: #666;
+}
+
 #generateBtn {
   font-size: 1rem;
   padding: 0.5rem 1rem;

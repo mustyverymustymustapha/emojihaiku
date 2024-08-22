@@ -46,6 +46,20 @@ function getAverageColor(emojis) {
     return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
 }
 
+function getMostFrequentEmoji(emojis) {
+    const emojiCounts = {};
+    let maxCount = 0;
+    let mostFrequent = '';
+    for (const emoji of emojis) {
+        emojiCounts[emoji] = (emojiCounts[emoji] || 0) + 1;
+        if (emojiCounts[emoji] > maxCount) {
+            maxCount = emojiCounts[emoji];
+            mostFrequent = emoji;
+        }
+    }
+    return { emoji: mostFrequent, count: maxCount };
+}
+
 function generateHaiku() {
     const line1 = generateHaikuLine(5);
     const line2 = generateHaikuLine(7);
@@ -62,6 +76,12 @@ function generateHaiku() {
     const allEmojis = line1 + line2 + line3;
     const averageColor = getAverageColor(allEmojis);
     document.body.style.backgroundColor = averageColor;
+
+    const characterCount = allEmojis.length;
+    document.getElementById('characterCount').textContent = `Total characters: ${characterCount}`;
+
+    const { emoji, count } = getMostFrequentEmoji(allEmojis);
+    document.getElementById('frequentEmoji').textContent = `Most frequent emoji: ${emoji} (${count} times)`;
 }
 
 document.getElementById('generateBtn').addEventListener('click', generateHaiku);

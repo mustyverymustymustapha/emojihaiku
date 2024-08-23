@@ -79,6 +79,15 @@ function getHaikuMood(emojis) {
     return `The mood of this haiku appears to be ${dominantCategory}.`;
 }
 
+function generateHaikuTitle(emojis) {
+    const uniqueEmojis = Array.from(new Set(emojis));
+    const randomEmoji1 = uniqueEmojis[Math.floor(Math.random() * uniqueEmojis.length)];
+    const randomEmoji2 = uniqueEmojis[Math.floor(Math.random() * uniqueEmojis.length)];
+    const word1 = emojiMeanings[randomEmoji1];
+    const word2 = emojiMeanings[randomEmoji2];
+    return `${word1.charAt(0).toUpperCase() + word1.slice(1)} ${word2}`;
+}
+
 function generateHaiku() {
     const line1 = generateHaikuLine(5);
     const line2 = generateHaikuLine(7);
@@ -104,6 +113,9 @@ function generateHaiku() {
 
     const mood = getHaikuMood(allEmojis);
     document.getElementById('haikuMood').textContent = mood;
+
+    const title = generateHaikuTitle(allEmojis);
+    document.getElementById('haikuTitle').textContent = title;
 }
 
 document.getElementById('generateBtn').addEventListener('click', generateHaiku);

@@ -21,6 +21,13 @@ h1 {
   margin-bottom: 1rem;
 }
 
+h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
 #haiku {
   font-size: 2rem;
   margin-bottom: 1rem;

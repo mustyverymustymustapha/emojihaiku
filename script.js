@@ -22,6 +22,15 @@ const emojiColors = {
     '🦋': '#00BFFF', '🐠': '#00FFFF', '🌊': '#1E90FF', '🏔️': '#FFFFFF', '🏖️': '#F0E68C'
 };
 
+const emojiCategories = {
+    '😀': 'happy', '😂': 'happy', '🤣': 'happy', '😍': 'love', '🥰': 'love',
+    '😎': 'cool', '🤔': 'thoughtful', '🤯': 'surprised', '🥳': 'celebratory', '😴': 'sleepy',
+    '🌈': 'nature', '🌞': 'nature', '🌙': 'nature', '⭐': 'nature', '🌍': 'nature',
+    '🌺': 'nature', '🌴': 'nature', '🍕': 'food', '🍦': 'food', '🎉': 'celebratory',
+    '🎈': 'celebratory', '🎸': 'music', '🚀': 'adventure', '🦄': 'fantasy', '🐳': 'animal',
+    '🦋': 'animal', '🐠': 'animal', '🌊': 'nature', '🏔️': 'nature', '🏖️': 'nature'
+};
+
 function getRandomEmoji() {
     return emojis[Math.floor(Math.random() * emojis.length)];
 }
@@ -60,6 +69,16 @@ function getMostFrequentEmoji(emojis) {
     return { emoji: mostFrequent, count: maxCount };
 }
 
+function getHaikuMood(emojis) {
+    const categoryCount = {};
+    for (const emoji of emojis) {
+        const category = emojiCategories[emoji];
+        categoryCount[category] = (categoryCount[category] || 0) + 1;
+    }
+    const dominantCategory = Object.entries(categoryCount).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+    return `The mood of this haiku appears to be ${dominantCategory}.`;
+}
+
 function generateHaiku() {
     const line1 = generateHaikuLine(5);
     const line2 = generateHaikuLine(7);
@@ -82,6 +101,9 @@ function generateHaiku() {
 
     const { emoji, count } = getMostFrequentEmoji(allEmojis);
     document.getElementById('frequentEmoji').textContent = `Most frequent emoji: ${emoji} (${count} times)`;
+
+    const mood = getHaikuMood(allEmojis);
+    document.getElementById('haikuMood').textContent = mood;
 }
 
 document.getElementById('generateBtn').addEventListener('click', generateHaiku);

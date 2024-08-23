@@ -48,6 +48,12 @@ h1 {
 #frequentEmoji {
   font-size: 0.9rem;
   color: #888;
+  margin-bottom: 0.5rem;
+}
+
+#haikuMood {
+  font-size: 0.9rem;
+  color: #888;
   margin-bottom: 1rem;
 }
 
